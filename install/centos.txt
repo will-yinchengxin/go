@@ -44,3 +44,7 @@ docker run -itd -p 7010:22 -p 7020:80  --name myCentos centos:7
 
 4) 配置全局代理
     go env -w GOPROXY=https://goproxy.cn,direct
+ 
+5) 卸载旧版本
+    rm -rf /usr/local/go
+    
