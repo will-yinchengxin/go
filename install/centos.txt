@@ -23,7 +23,7 @@ docker run -itd -p 7010:22 -p 7020:80  --name myCentos centos:7
     passwd
 ------------------------------------- Go安装 -------------------------------------
 1) 下载
-    wget https://golang.google.cn/dl/go1.17.1.linux-amd64.tar.gz / wget https://golang.org/dl/go1.17.1.linux-amd64.tar.gz(需要翻墙)
+    wget https://golang.google.cn/dl/go1.15.8.linux-amd64.tar.gz / wget https://golang.org/dl/go1.17.1.linux-amd64.tar.gz(需要翻墙)
 
 2) 将下载的包解压到 /usr/local目录下
     tar -zxf go1.17.1.linux-amd64.tar.gz -C /usr/local
