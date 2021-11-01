@@ -47,4 +47,7 @@ docker run -itd -p 7010:22 -p 7020:80  --name myCentos centos:7
  
 5) 卸载旧版本
     rm -rf /usr/local/go
-    
+------------------------------------- Docker安装 ------------------------------------- 
+1) docker pull willyin/go-centos
+2) docker run -itd -p 7010:22 -p 7020:80 -p 7030:8080 --name Go willyin/go-centos
+3) 进入容器, 执行 source /etc/profile 和 service start sshd
