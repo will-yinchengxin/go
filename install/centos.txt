@@ -7,7 +7,10 @@ docker run -itd -p 7010:22 -p 7020:80  --name myCentos centos:7
     yum install wget -y
     yum install initscripts -y
     yum install net-tools -y  // netstat 是显示网络连接、路由表和网络接口信息
+    
 修改ssh配置(打开注释):
+vi /etc/ssh/sshd_config
+
     Port 22
     ListenAddress 0.0.0.0
     ListenAddress ::
