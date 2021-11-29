@@ -6,14 +6,14 @@
 ``[root@65935aeb351a project]# go run -n[-x] main.go``
 
 大致流程分为:
-- 1) 创建编译依赖所需要的临时目录(临时环境变量 WORK), 可以通过设置全局的 GOTMPDIR 来进行更改
-- 2) 编译和生成编译所需要的依赖
-- 3) 创建并进入编译二进制文件所需要的临时目录, 即 exe 目录
-- 4) 生成可执行文件
-- 5) 执行可执行文件
+- 创建编译依赖所需要的临时目录(临时环境变量 WORK), 可以通过设置全局的 GOTMPDIR 来进行更改
+- 编译和生成编译所需要的依赖
+- 创建并进入编译二进制文件所需要的临时目录, 即 exe 目录
+- 生成可执行文件
+- 执行可执行文件
 
 ### go build
-go build [-o output] [-i] [build flags] [packages] 编译指定的源文件,软件包及依赖包,其不会运行编译后的二进制文件
+`go build [-o output] [-i] [build flags] [packages]` 编译指定的源文件,软件包及依赖包,其不会运行编译后的二进制文件
 指定 二进制 文件为其他名称, 通过 -o 调整参数 go build -o 例: `go build -o youAndme`
 
 ### go build 和 go run 的区别
