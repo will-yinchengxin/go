@@ -1,0 +1,21 @@
+oss:
+  accessKeyId: LTAI5tH5Npb8Wq1F4vWoqgiLad
+  accessKeySecret: X9j1kEWXEF6ZEtdtBplHB6gZFqANJCf
+  host: http://quli-ota-test.oss-cn-hangzhou.aliyuncs.com
+  uploadDir: firmware/fadsfads
+  expireTime: 6199
+  bucketName: quli-ota-test
+  endpoint: oss-cn-hangzhou.aliyuncs.com
+  downLoadPartNum: 100    #下载分片数量
+obs:
+  ak: AAE5DG77IBL4U7SXAH9F
+  sk: uLZIA0rQS5qgtdSQ8joFx4G3d4Yl9AAFDZQiY9Hd
+  dir: 100072/ota
+  host: fat-obs.shadowcreator.com
+  endPoint: obs.cn-east-3.myhuaweicloud.com
+  bucketName: scc-public-fat
+  expireTime: 3600
+  downLoadPartNum: 100
+  domainName: hw97857951
+  userName: baoya_zhang
+  userPassword: Hao666633!!

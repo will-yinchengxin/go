@@ -1,0 +1,2 @@
+# 命令 或 工具 https://godbolt.org/
+go tool compile -N -l -S main.go
