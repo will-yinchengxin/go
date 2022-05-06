@@ -1,0 +1,30 @@
+mysql:
+  fuxi:
+    host: 124.70.147.129
+    port: 3306
+    database: fuxi
+    user: root
+    password: k5ztqiGr
+    maxIdleConns: 200
+    maxOpenConns: 2048
+    connMaxLifetime: 3600
+    connMaxIdletime: 120
+redis:
+  fuxi:
+    host: 124.70.147.129:6666
+    password: ""
+    database: 0
+    max_idle_num: 50
+    maxActive: 5000
+    maxIdleTimeout: 600
+    connectTimeout: 1
+    readTimeout: 2
+jaeger:
+  host: 124.70.147.129:6831
+xxl-job-es:
+  serverAddr: http://192.168.1.50:8080/xxl-job-admin
+  actuator: fuxi
+  es:
+    - 124.70.147.129:9200
+  server:
+    - 124.70.147.129:9200
