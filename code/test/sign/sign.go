@@ -86,3 +86,11 @@ func TestDemo() {
 	exit status 1
 	*/
 }
+
+func SingEasy() {
+	sigc := make(chan os.Signal, 1)
+	signal.Notify(sigc, syscall.SIGINT, syscall.SIGTERM)
+	defer signal.Stop(sigc)
+	<-sigc
+	fmt.Println("should stop")
+}
