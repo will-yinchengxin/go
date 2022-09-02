@@ -21,11 +21,13 @@ func CronJob() {
 		return
 	}
 
-	c.Start()
-	fmt.Println("start cron task success")
-	for {
-		time.Sleep(time.Second)
-	}
+	c.Run() //同步阻塞执行
+	
+	//c.Start() // 异步线程执行
+	//fmt.Println("start cron task success")
+	//for {
+	//	time.Sleep(time.Second)
+	//}
 }
 
 func randCreator(l int) string {
