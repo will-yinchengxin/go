@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"time"
+	"github.com/vmihailenco/msgpack"
 )
 
 // 这里使用msgpack实现消息的序列化。messagepack是一个高效的二进制序列化协议。
