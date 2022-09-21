@@ -5,6 +5,11 @@ import (
 )
 
 /*
+
+运行时检查竟态的命令：go run -race main.go
+构建时检查竟态的命令：go build -race main.go
+测试时检查竟态的命令：go test -race main.go
+
 ==================
 WARNING: DATA RACE
 Write at 0x00c00013e008 by goroutine 7:
