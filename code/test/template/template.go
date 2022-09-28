@@ -1,7 +1,5 @@
 package template
 
-package main
-
 import (
 	"flag"
 	"fmt"
@@ -36,6 +34,17 @@ var defaultTemplates = `dev:
      MaxOpenConns: 30
      ConnMaxLifetime: 28800
      ConnMaxIdletime: 7200
+   willAno:
+      Host: {{.DbHost}}
+      Port: {{.DbPort}}
+      User: {{.DbUsername}}
+      Password: {{.DbPassword}}
+      DataBase: vcfn_live
+      ParseTime: True
+      MaxIdleConns: 10
+      MaxOpenConns: 30
+      ConnMaxLifetime: 28800
+      ConnMaxIdletime: 7200		
  redis:
    will:
      host: {{.RedisHost}}:{{.RedisPort}}
@@ -46,12 +55,6 @@ var defaultTemplates = `dev:
      maxIdleTimeout: 600
      connectTimeout: 1
      readTimeout: 2
- rocketmq:
-   GroupName: test-rocket
-   Topic: test-rocket
-   Host:
-     - 127.0.0.1:9876
-   Retry: 3
 `
 var (
 	err    error
@@ -78,6 +81,10 @@ func main() {
 
 	vp := viper.New()
 	vp.AddConfigPath(filePath)
+	if len(filePath) <= 0 {
+		log.Println("Please give the filePath, like '-filePath /usr/local/'")
+		os.Exit(0)
+	}
 	if len(fileName) <= 0 {
 		log.Println("Please give the fileName, like '-fileName vpm.json'")
 		os.Exit(0)
@@ -86,12 +93,12 @@ func main() {
 	vp.SetConfigType("json")
 	err = vp.ReadInConfig()
 	if err != nil {
-		log.Fatal(fmt.Errorf("ReadInConfig Fail, Caused:\n\n   %v\n", err))
+		log.Fatal(fmt.Errorf("ReadInConfig Fail, Caused:   %v\n", err))
 		os.Exit(0)
 	}
 	err = vp.Unmarshal(&config)
 	if err != nil {
-		log.Println(fmt.Errorf("Parse Fail, Caused:\n\n   %v\n", err))
+		log.Println(fmt.Errorf("Parse Fail, Caused:  %v\n", err))
 		os.Exit(0)
 	}
 	if len(templates) <= 0 {
@@ -100,70 +107,47 @@ func main() {
 		tmpl, err = template.New("test").Parse(templates)
 	}
 	if err != nil {
-		log.Fatal(fmt.Errorf("Template Generate Fail, Caused:\n\n   %v\n", err))
+		log.Fatal(fmt.Errorf("Template Generate Fail, Caused:   %v\n", err))
 		os.Exit(0)
 	}
-	f, _ = os.Create(outFilePath + outFileName)
+	CreateDir(outFilePath)
+	f, err = os.Create(outFilePath + outFileName)
 	defer func() {
 		f.Close()
 	}()
 	err = tmpl.Execute(f, config)
 	if err != nil {
-		log.Fatal(fmt.Errorf("Template Generate Fail:\n\n   %v\n", err))
+		log.Fatal(fmt.Errorf("Template Generate Fail:  %v\n", err))
 		os.Exit(0)
 	}
 	log.Println("Generate file success")
 }
 
-/*
-./WillCG -filePath ./  -fileName vrpm.json  -outFileName dev.yaml  -outFilePath ./    -templates "settings:
-  application:
-    # dev开发环境 test测试环境 prod线上环境
-    mode: dev
-    # 服务器ip，默认使用 0.0.0.0
-    host: {{.DbHost}}
-    # 服务名称
-    name: testApp
-    # 端口号
-    port: 8000 # 服务端口号
-    readtimeout: 1
-    writertimeout: 2
-    # 数据权限功能开关
-    enabledp: false
-  logger:
-    # 日志存放路径
-    path: temp/logs
-    # 日志输出，file：文件，default：命令行，其他：命令行
-    stdout: '' #控制台日志，启用后，不输出到文件
-    # 日志等级, trace, debug, info, warn, error, fatal
-    level: trace
-    # 数据库日志开关
-    enableddb: false
-  jwt:
-    # token 密钥，生产环境时及的修改
-    secret: vrcm
-    # token 过期时间 单位：秒
-    timeout: 3600
-  database:
-    # 数据库类型 mysql, sqlite3, postgres, sqlserver
-    # sqlserver: sqlserver://用户名:密码@地址?database=数据库名
-    driver: mysql
-    # 数据库连接字符串 mysql 缺省信息 charset=utf8&parseTime=True&loc=Local&timeout=1000ms
-    source: root:1726asLYH@tcp(127.0.0.1:3306)/gaa?charset=utf8&parseTime=True&loc=Local&timeout=1000ms
-  gen:
-    # 代码生成读取的数据库名称
-    dbname: dbname
-    # 代码生成是使用前端代码存放位置，需要指定到src文件夹，相对路径
-    frontpath: ../vrcm-ui/src
-  extend: # 扩展项使用说明
-    demo:
-      name: data
-  cache:
-    memory: ''
-  queue:
-    memory:
-      poolSize: 100
-  locker:
-    redis:
-"
-*/
+func HasDir(path string) (bool, error) {
+	_, _err := os.Stat(path)
+	if _err == nil {
+		return true, nil
+	}
+	if os.IsNotExist(_err) {
+		return false, nil
+	}
+	return false, _err
+}
+
+func CreateDir(path string) {
+	_exist, _err := HasDir(path)
+	if _err != nil {
+		fmt.Printf("获取文件夹异常 -> %v\n", _err)
+		return
+	}
+	if _exist {
+		fmt.Println("文件夹已存在！")
+	} else {
+		err := os.Mkdir(path, os.ModePerm)
+		if err != nil {
+			fmt.Printf("创建目录异常 -> %v\n", err)
+		} else {
+			fmt.Println("创建成功!")
+		}
+	}
+}
