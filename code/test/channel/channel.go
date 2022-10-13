@@ -25,6 +25,23 @@ func CloseChan() {
 	close(ch)
 	time.Sleep(time.Second)
 }
+// DemoOne 同时打开多个 goroutine 的方法
+func StartBatchGoroutine() {
+	begin := make(chan interface{})
+	var wg sync.WaitGroup
+	for i := 0; i < 5; i++ {
+		wg.Add(1)
+		go func(i int) {
+			defer wg.Done()
+			<-begin
+			fmt.Printf("%v has begin\n", i)
+		}(i)
+	}
+	fmt.Println("Unlock goroutine")
+	close(begin) // 关闭 channel ，从而同时打开所有的 goroutine
+	wg.Wait()
+}
+
 /*
 go 中 channel 接受数据有两种方式
 	1) msg := <- ch
