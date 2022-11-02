@@ -1,1 +1,0 @@
-[file type 类型被篡改](https://stackoverflow.com/questions/70144086/why-are-files-named-types-go-are-ignored-in-goland)：（https://stackoverflow.com/questions/70144086/why-are-files-named-types-go-are-ignored-in-goland）
