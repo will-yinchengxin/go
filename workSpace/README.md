@@ -6,19 +6,19 @@ Go1.18 正式发布后，工作区模式有点变化(工作区模式真的很有
 ## 一.传统模式
 ### 1.1 操作流程
 ````shell
-$ mkdir mypkg example
-$ cd mypkg/
-$ go mod init github.com/will-yinchengxin/mypkg
+$ mkdir mytest example
+$ cd mytest/
+$ go mod init github.com/will-yinchengxin/mytest
 $ cd ../example/
 $ go mod init github.com/will-yinchengxin/example
 ````
 
 > #### 在 mypkg/bar.go 中增加如下示例代码
 ````go
-package mypkg
+package mytest
 
 func Bar() {
-	println("This is package mypkg")
+	println("This is package mytest")
 }
 ````
 
@@ -26,15 +26,15 @@ func Bar() {
 ````go
 package main
 
-import "github.com/will-yinchengxin/mypkg"
+import "github.com/will-yinchengxin/mytest"
 
 func main() {
-	mypkg.Bar()
+	mytest.Bar()
 }
 ````
 这时候，如果我们运行 go mod tidy，肯定会报错，因为我们的 mypkg 包根本没有提交到 github 上，肯定找不到。go run main.go 也就不成功。
 
-我们当然可以提交 mypkg 到 github，但我们每修改一次 mypkg，就需要提交（而且每次提交之后需要在 example 中 go get 最新版本），否则 example 中就没法使用上最新的。
+我们当然可以提交 mytest 到 github，但我们每修改一次 mytest，就需要提交（而且每次提交之后需要在 example 中 go get 最新版本），否则 example 中就没法使用上最新的。
 
 针对这种情况，目前是建议通过 replace 来解决，即在 example 中的 go.mod 增加如下 replace：（v1.0.0 根据具体情况修改，还未提交，可以使用 v1.0.0）
 
