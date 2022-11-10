@@ -1,0 +1,11 @@
+{
+  "servicePort" : "18899",
+  "dbHost" : "127.0.0.1",
+  "dbPort" : "3306",
+  "dbUsername" : "bossen",
+  "dbPassword" : "Passw0rd@123",
+  "redisHost" : "127.0.0.1",
+  "redisPort" : "6379",
+  "redisUsername" : "root",
+  "redisPassword" : ""
+}
