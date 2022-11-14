@@ -7,8 +7,8 @@ import (
 )
 
 var (
-	//go:embed vrpm.json
-	JsonData string
+  //go:embed vrpm.json
+  JsonData string
   LocalData string = `{"name":{"first":"Janet","last":"Prichard"},"age":47}`
 )
 
@@ -22,8 +22,8 @@ gjson 是 tidwall 下的经典开源库，和 sjson 常常一起出现。前者�
 */
 func main() {
   // 读取 value
-	value := gjson.Get(JsonData, "servicePort")
-	fmt.Println(value)
+  value := gjson.Get(JsonData, "servicePort")
+  fmt.Println(value)
   
   
   // 校验 value 是否存在
@@ -40,6 +40,4 @@ func main() {
     println(value.String()) 
     return true // keep iterating
   })
-
-  
 }
