@@ -35,7 +35,7 @@ func main() {
   }
   
   // 迭代器
-  result := gjson.Get(json, "programmers")
+  result := gjson.Get(LocalData, "programmers")
   result.ForEach(func(key, value gjson.Result) bool {
     println(value.String()) 
     return true // keep iterating
