@@ -82,3 +82,37 @@ func main() {
 		172.16.27.99 /usr/local 123 12m0s
 	*/
 }
+
+/*
+func ruleEngineMain() {
+
+	cfg := ruleEngineModules.Config{
+		PromlogConfig: promlog.Config{},
+	}
+
+	// filepath.Base: Base returns the last element of path.
+	// kingpin: 类似 flag parse
+	a := kingpin.New(filepath.Base(os.Args[0]), "Rule Engine")
+
+	a.HelpFlag.Short('h')
+	logs.Error("start rule engine.......")
+
+	a.Flag("gateway.url", "alert gateway url").
+		Default("http://localhost:32000").StringVar(&cfg.GatewayURL)
+	a.Flag("gateway.path.rule", "alert gateway rule url").
+		Default("/api/v1/rules").StringVar(&cfg.GatewayPathRule)
+	a.Flag("gateway.path.prom", "alert gateway prom url").
+		Default("/api/v1/proms").StringVar(&cfg.GatewayPathProm)
+	a.Flag("gateway.path.notify", "alert gateway notify url").
+		Default("/api/v1/alerts").StringVar(&cfg.GatewayPathNotify)
+
+	a.Flag("notify.retries", "notify retries").
+		Default("3").IntVar(&cfg.NotifyReties)
+	a.Flag("evaluation.interval", "rule evaluation interval").
+		Default("15s").SetValue(&cfg.EvaluationInterval)
+	a.Flag("reload.interval", "rule reload interval").
+		Default("5m").SetValue(&cfg.ReloadInterval)
+	a.Flag("auth.token", "http auth token").
+		Default("96smhbNpRguoJOCEKNrMqQ").StringVar(&cfg.AuthToken)
+}		
+*/
