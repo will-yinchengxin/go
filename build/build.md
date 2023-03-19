@@ -16,12 +16,14 @@ import (
 
  go build -o -x will main.go   		// -x 打印出执行的命令名
 
- # 通过链接选项 -X 来动态传入版本信息,
+ -ldflags "-X" 通过链接选项 -X 来动态传入版本信息,
  flags="-X main.buildstamp=`date -u '+%Y-%m-%d_%I:%M:%S%p'`"
  go build -ldflags "-X main.name=will" -o will main.go
- # 多个参数要以 '' 包裹分隔
- go build -ldflags "-X 'main.name=will' -X 'main.version=$(go version)'" -o will main.go
+ go build -ldflags "-X 'main.name=will' -X 'main.version=$(go version)'" -o will main.go # 多个参数要以 '' 包裹分隔
  # 这里使用 main.** 正常可以替换成 pkgName.*** 如: -X 'github.com/willyin/willshark/conf.VERSION=$TRAVIS_TAG'
+
+ -ldflags "-s -w"  # 压缩编译后的体积
+ go build -ldflags "-X 'main.name=will' -X 'main.version=$(go version)' -s -w"  -o will main.go
 */
 
 var (
