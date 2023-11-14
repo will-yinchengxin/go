@@ -394,15 +394,19 @@ $ mv ./bin/protoc /usr/local/bin/
 安装 protoc-gen-go 工具 (确保已经安装 golang 环境, 并将 $GOPATH 加入至环境变量)
 ```shell
 $ go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
-$ protoc --go_out=.  user.proto
+$ protoc --go_out=.   user.proto
 
 # 生成的文件 user.pb.go
 ````
 安装 protoc-gen-go-grpc 工具 (确保已经安装 golang 环境, 并将 $GOPATH 加入至环境变量)
 ```shell
 $ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
-$ protoc --go-grpc_out=. user.proto
+$ protoc --go-grpc_out=.   user.proto
 
 # 生成的文件 user_grpc.pb.go
+````
+合并以上两条命令
+````shell
+protoc --go_out=. --go-grpc_out=.   user.proto
 ````
 
