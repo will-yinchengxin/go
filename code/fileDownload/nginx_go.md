@@ -113,6 +113,11 @@ server {
     }
 }
 ````
+重新启动 nginx 
+```shell
+[root@master nginx]# /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf  -s reload
+````
+
 访问浏览器
 
 ````
