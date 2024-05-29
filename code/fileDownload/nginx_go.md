@@ -146,7 +146,7 @@ func TestRemoteDownloadFile(t *testing.T) {
 
 func downloadAndPassToFrontend(w http.ResponseWriter, r *http.Request) {
 	// 远程服务器上的.tar.gz文件URL
-	remoteFileURL := "http://172.16.27.95:8900/download/www.bb.com/2.tar.gz"
+	remoteFileURL := "http://172.16.27.95:8900/cdnfiles/www.bb.com/2.tar.gz"
 
 	client := &http.Client{}
 
